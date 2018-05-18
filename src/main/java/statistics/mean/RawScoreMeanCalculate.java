@@ -1,10 +1,13 @@
 package statistics.mean;
 
 import statistics.exception.NoDataException;
-import statistics.model.RawScoreInterface;
+import com.rsp.core.util.statistics.model.RawScoreInterface;
 
 import java.util.Iterator;
 
+/**
+ * 原始数据(未处理数据)的平均值
+ */
 public class RawScoreMeanCalculate implements MeanCalculateInterface {
 
     public double calc(Iterable iterable) {

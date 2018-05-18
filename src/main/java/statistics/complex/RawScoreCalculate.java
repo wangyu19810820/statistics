@@ -1,9 +1,10 @@
 package statistics.complex;
 
-import statistics.exception.NoDataException;
-import statistics.mean.RawScoreMeanCalculate;
-import statistics.model.RawScoreInterface;
-import statistics.stdev.RawScoreStandardDeviationCalculate;
+import com.rsp.core.util.statistics.exception.NoDataException;
+import com.rsp.core.util.statistics.mean.HundredScoreMeanCalculate;
+import com.rsp.core.util.statistics.mean.RawScoreMeanCalculate;
+import com.rsp.core.util.statistics.model.RawScoreInterface;
+import com.rsp.core.util.statistics.stdev.RawScoreStandardDeviationCalculate;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class RawScoreCalculate extends AbstractScoreCalculate {
 
-    public List<Double> calc(Iterable<RawScoreInterface> iterable) {
+    public List<RawScoreInterface> calc(Iterable<? extends RawScoreInterface> iterable) {
         RawScoreStandardDeviationCalculate calculate = new RawScoreStandardDeviationCalculate();
         double threeTimeStdev = calculate.calc(iterable) * 3;
         RawScoreMeanCalculate meanCalculate = new RawScoreMeanCalculate();
@@ -19,12 +20,14 @@ public class RawScoreCalculate extends AbstractScoreCalculate {
 
         // 排除异常值
         ArrayList<RawScoreInterface> newDatas = new ArrayList<>();
-        Iterator<RawScoreInterface> iterator = iterable.iterator();
+        Iterator<? extends RawScoreInterface> iterator = iterable.iterator();
         while (iterator.hasNext()) {
             RawScoreInterface rawScore = iterator.next();
             double data = rawScore.getNum();
             if (Math.abs(data - mean) <= threeTimeStdev) {
                 newDatas.add(rawScore);
+            } else {
+//                System.out.println("排除：" + data);
             }
         }
 
@@ -49,10 +52,15 @@ public class RawScoreCalculate extends AbstractScoreCalculate {
             RawScoreInterface rawScore = hundardScoreIterator.next();
             double score = rawScore.getStandardScore();
             double hundardScore = offset + (score - minScore) / offsetScore * multi;
-            rawScore.setHundardScore(hundardScore);
+            rawScore.setHundredScore(hundardScore);
         }
 
-        return null;
+        return newDatas;
+    }
+
+    public Double calcHundardMean(Iterable<? extends RawScoreInterface> iterable) {
+        HundredScoreMeanCalculate meanCalculate = new HundredScoreMeanCalculate();
+        return meanCalculate.calc(iterable);
     }
 
     private double maxScore(Iterable<RawScoreInterface> iterable) {

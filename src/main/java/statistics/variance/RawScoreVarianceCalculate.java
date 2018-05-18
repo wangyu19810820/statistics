@@ -7,6 +7,9 @@ import statistics.model.RawScoreInterface;
 
 import java.util.Iterator;
 
+/**
+ * 总体方差
+ */
 public class RawScoreVarianceCalculate extends AbstractVarianceCalculate {
 
     public RawScoreVarianceCalculate() {

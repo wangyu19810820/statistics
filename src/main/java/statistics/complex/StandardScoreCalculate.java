@@ -1,8 +1,8 @@
 package statistics.complex;
 
-import statistics.mean.PopulationMeanCalculate;
-import statistics.stdev.PopulationStandardDeviationCalculate;
-import statistics.stdev.SampleStandardDeviationCalculate;
+
+import com.rsp.core.util.statistics.mean.PopulationMeanCalculate;
+import com.rsp.core.util.statistics.stdev.SampleStandardDeviationCalculate;
 
 import java.util.ArrayList;
 import java.util.Collections;

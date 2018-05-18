@@ -1,15 +1,15 @@
 package statistics.mean;
 
 import statistics.exception.NoDataException;
+import com.rsp.core.util.statistics.model.RawScoreInterface;
 
 import java.util.Iterator;
 
 /**
- * 普通平均值，序列中为数值
+ * 百分比数值数据(第二步计算结果数据)的平均值
  */
-public class PopulationMeanCalculate implements MeanCalculateInterface {
+public class HundredScoreMeanCalculate implements MeanCalculateInterface {
 
-    @Override
     public double calc(Iterable iterable) {
         if (iterable == null) {
             throw new NoDataException();
@@ -17,9 +17,9 @@ public class PopulationMeanCalculate implements MeanCalculateInterface {
 
         double sum = 0;
         int count = 0;
-        Iterator<Double> iterator = iterable.iterator();
+        Iterator<RawScoreInterface> iterator = iterable.iterator();
         while (iterator.hasNext()) {
-            sum += iterator.next();
+            sum += iterator.next().getHundredScore();
             count++;
         }
 
@@ -28,4 +28,5 @@ public class PopulationMeanCalculate implements MeanCalculateInterface {
         }
         return sum / count;
     }
+
 }

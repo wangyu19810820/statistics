@@ -1,13 +1,23 @@
 package statistics.model;
 
+/**
+ * 学生评教的三步算法的数据模型
+ */
 public class Score implements RawScoreInterface {
 
+    /** 教师 */
     private String teacher;
+    /** 班级 */
     private String className;
+    /** 组织（学院、学校机构等） */
     private String organizeName;
+
+    /** 数量 */
     private Double num;
+    /** 方差 */
     private Double standardScore;
-    private Double hundardScore;
+    /** 百分比数值数据 */
+    private Double hundredScore;
 
     public String getTeacher() {
         return teacher;
@@ -52,11 +62,11 @@ public class Score implements RawScoreInterface {
     }
 
     @Override
-    public Double getHundardScore() {
-        return hundardScore;
+    public Double getHundredScore() {
+        return hundredScore;
     }
 
-    public void setHundardScore(Double hundardScore) {
-        this.hundardScore = hundardScore;
+    public void setHundredScore(Double hundredScore) {
+        this.hundredScore = hundredScore;
     }
 }

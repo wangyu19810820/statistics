@@ -1,8 +1,12 @@
 package statistics.stdev;
 
+
 import statistics.variance.RawScoreVarianceCalculate;
 import statistics.variance.VarianceCalculateInterface;
 
+/**
+ * 总体标准差计算器
+ */
 public class RawScoreStandardDeviationCalculate implements StandardDeviationCalculateInterface {
 
     @Override
